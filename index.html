@@ -3,13 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Backend Roadmap v3.0</title>
+<title>Backend Roadmap v4.0</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Clash+Display:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Bebas+Neue&display=swap');
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 :root {
   --bg: #080810;
   --bg2: #0d0d18;
@@ -20,21 +17,17 @@
   --muted: #5a5a7a;
   --dim: #3a3a5a;
   --white: #f0f0ff;
-
   --p1: #e8c547;
   --p2: #47c5e8;
   --p3: #47e8a0;
   --p4: #e8476a;
   --p5: #a047e8;
   --p6: #e88047;
+  --p65: #e847c5;
   --p7: #e84747;
-
-  --glow1: rgba(232,197,71,0.12);
-  --glow3: rgba(71,232,160,0.1);
+  --p8: #47e8e8;
 }
-
 html { scroll-behavior: smooth; }
-
 body {
   background: var(--bg);
   color: var(--text);
@@ -42,8 +35,6 @@ body {
   overflow-x: hidden;
   cursor: none;
 }
-
-/* CURSOR */
 .cursor {
   width: 8px; height: 8px;
   background: var(--p1);
@@ -52,7 +43,7 @@ body {
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+  transition: transform 0.1s, width 0.2s, height 0.2s;
   mix-blend-mode: difference;
 }
 .cursor-ring {
@@ -63,18 +54,14 @@ body {
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);
-  transition: transform 0.15s ease-out, width 0.2s, height 0.2s;
+  transition: transform 0.15s ease-out;
 }
-
-/* NOISE */
 body::before {
   content: '';
   position: fixed; inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   pointer-events: none; z-index: 1000; opacity: 0.6;
 }
-
-/* GRID BG */
 body::after {
   content: '';
   position: fixed; inset: 0;
@@ -84,20 +71,16 @@ body::after {
   background-size: 40px 40px;
   pointer-events: none; z-index: 0;
 }
-
-/* LAYOUT */
 .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px 120px; position: relative; z-index: 2; }
 
 /* HERO */
 .hero {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   justify-content: center;
   padding: 60px 0 80px;
   position: relative;
 }
-
 .hero-eyebrow {
   font-size: 10px;
   letter-spacing: 4px;
@@ -106,12 +89,7 @@ body::after {
   margin-bottom: 32px;
   display: flex; align-items: center; gap: 12px;
 }
-.hero-eyebrow::before {
-  content: '';
-  width: 40px; height: 1px;
-  background: var(--dim);
-}
-
+.hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--dim); }
 .hero-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(72px, 14vw, 140px);
@@ -125,116 +103,53 @@ body::after {
   content: '';
   position: absolute;
   bottom: 4px; left: 0; right: 0;
-  height: 3px;
-  background: var(--p1);
-  opacity: 0.4;
+  height: 3px; background: var(--p1); opacity: 0.4;
 }
-
 .hero-sub {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 48px;
-  margin-top: 16px;
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 48px; margin-top: 16px;
 }
-
 .hero-stats {
   display: flex; gap: 0; flex-wrap: wrap;
-  border: 1px solid var(--border2);
-  border-radius: 2px;
-  overflow: hidden;
-  width: fit-content;
+  border: 1px solid var(--border2); border-radius: 2px;
+  overflow: hidden; width: fit-content;
 }
-.stat {
-  padding: 16px 28px;
-  border-right: 1px solid var(--border2);
-}
+.stat { padding: 16px 28px; border-right: 1px solid var(--border2); }
 .stat:last-child { border-right: none; }
 .stat-val {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
-  color: var(--p1);
-  line-height: 1;
-  letter-spacing: 1px;
+  font-size: 32px; color: var(--p1);
+  line-height: 1; letter-spacing: 1px;
 }
-.stat-label {
-  font-size: 9px;
-  color: var(--muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-top: 4px;
-}
-
+.stat-label { font-size: 9px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
 .scroll-hint {
-  position: absolute;
-  bottom: 40px; left: 0;
-  font-size: 9px;
-  color: var(--dim);
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  position: absolute; bottom: 40px; left: 0;
+  font-size: 9px; color: var(--dim); letter-spacing: 3px; text-transform: uppercase;
   display: flex; align-items: center; gap: 10px;
   animation: pulse 2s infinite;
 }
-.scroll-hint::after {
-  content: '';
-  width: 1px; height: 40px;
-  background: linear-gradient(to bottom, var(--dim), transparent);
-}
+.scroll-hint::after { content: ''; width: 1px; height: 40px; background: linear-gradient(to bottom, var(--dim), transparent); }
 @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
 
-/* DAILY BLOCK */
+/* SECTION LABEL */
 .section-label {
-  font-size: 9px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 20px;
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 20px;
   display: flex; align-items: center; gap: 12px;
 }
-.section-label::after {
-  content: '';
-  flex: 1; height: 1px;
-  background: var(--border);
-}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
+/* DAILY */
 .daily-card {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-top: 2px solid var(--p1);
-  padding: 28px 32px;
-  margin-bottom: 64px;
+  background: var(--card); border: 1px solid var(--border2);
+  border-top: 2px solid var(--p1); padding: 28px 32px; margin-bottom: 64px;
 }
-.daily-title {
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--p1);
-  margin-bottom: 24px;
-}
-.daily-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--border);
-}
-.daily-slot {
-  background: var(--bg2);
-  padding: 18px 20px;
-}
-.daily-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 42px;
-  line-height: 1;
-  color: var(--white);
-}
-.daily-num sub {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-  font-weight: 300;
-  color: var(--muted);
-  vertical-align: baseline;
-}
+.daily-title { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--p1); margin-bottom: 24px; }
+.daily-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
+.daily-slot { background: var(--bg2); padding: 18px 20px; }
+.daily-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; line-height: 1; color: var(--white); }
+.daily-num sub { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 300; color: var(--muted); vertical-align: baseline; }
 .daily-desc { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
 .ds1 .daily-num { color: var(--p1); }
 .ds2 .daily-num { color: var(--p3); }
@@ -243,708 +158,221 @@ body::after {
 
 /* PHASES */
 .phases { display: flex; flex-direction: column; gap: 2px; margin-bottom: 64px; }
-
-.phase {
-  background: var(--card);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  transition: border-color 0.2s;
-}
+.phase { background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: border-color 0.2s; }
 .phase:hover { border-color: var(--border2); }
 .phase.open { border-color: var(--border2); }
-
-.phase-bar {
-  display: flex;
-  align-items: stretch;
-  cursor: pointer;
-  min-height: 64px;
-}
-.phase-color-bar {
-  width: 3px;
-  flex-shrink: 0;
-}
+.phase-bar { display: flex; align-items: stretch; cursor: pointer; min-height: 64px; }
+.phase-color-bar { width: 3px; flex-shrink: 0; }
 .phase-inner {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 20px;
-  flex: 1;
-  flex-wrap: wrap;
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 20px; flex: 1; flex-wrap: wrap;
 }
 .phase-num-badge {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  padding: 4px 10px 3px;
-  border: 1px solid currentColor;
-  flex-shrink: 0;
+  font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 2px;
+  padding: 4px 10px 3px; border: 1px solid currentColor; flex-shrink: 0;
 }
 .phase-name { font-size: 14px; font-weight: 600; flex: 1; min-width: 140px; color: var(--white); }
 .phase-meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-.phase-hrs {
-  font-size: 11px;
-  color: var(--muted);
-}
-.phase-weeks {
-  font-size: 10px;
-  color: var(--bg);
-  padding: 3px 10px 2px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.phase-chevron {
-  font-size: 16px;
-  color: var(--dim);
-  transition: transform 0.25s;
-  margin-left: 4px;
-  flex-shrink: 0;
-}
+.phase-hrs { font-size: 11px; color: var(--muted); }
+.phase-weeks { font-size: 10px; color: var(--bg); padding: 3px 10px 2px; font-weight: 600; letter-spacing: 1px; }
+.phase-chevron { font-size: 16px; color: var(--dim); transition: transform 0.25s; margin-left: 4px; flex-shrink: 0; }
 .phase.open .phase-chevron { transform: rotate(180deg); }
-
-.phase-body {
-  display: none;
-  padding: 0 20px 24px 23px;
-  border-top: 1px solid var(--border);
-}
+.phase-body { display: none; padding: 0 20px 24px 23px; border-top: 1px solid var(--border); }
 .phase.open .phase-body { display: block; }
-
 .pb-section { margin-top: 20px; }
-.pb-label {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
+.pb-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.tag-item {
-  font-size: 11px;
-  padding: 4px 10px;
-  background: var(--bg2);
-  border: 1px solid var(--border2);
-  color: var(--text);
-}
-.tag-item.new {
-  border-color: var(--p3);
-  color: var(--p3);
-}
-.tag-item.warn {
-  border-color: var(--p4);
-  color: var(--p4);
-}
-
+.tag-item { font-size: 11px; padding: 4px 10px; background: var(--bg2); border: 1px solid var(--border2); color: var(--text); }
+.tag-item.new { border-color: var(--p3); color: var(--p3); }
+.tag-item.warn { border-color: var(--p4); color: var(--p4); }
 .output-rows { display: flex; flex-direction: column; gap: 6px; }
-.output-row {
-  font-size: 12px;
-  color: var(--text);
-  padding: 8px 12px;
-  background: var(--bg2);
-  border-left: 2px solid var(--dim);
-  line-height: 1.5;
-}
+.output-row { font-size: 12px; color: var(--text); padding: 8px 12px; background: var(--bg2); border-left: 2px solid var(--dim); line-height: 1.5; }
 .output-row.highlight { border-left-color: var(--p3); }
-
-.warn-strip {
-  margin-top: 16px;
-  padding: 12px 16px;
-  background: rgba(232,71,106,0.06);
-  border: 1px solid rgba(232,71,106,0.2);
-  font-size: 11px;
-  color: #c07080;
-  line-height: 1.6;
-}
+.warn-strip { margin-top: 16px; padding: 12px 16px; background: rgba(232,71,106,0.06); border: 1px solid rgba(232,71,106,0.2); font-size: 11px; color: #c07080; line-height: 1.6; }
 .warn-strip strong { color: var(--p4); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 4px; }
-
-.note-strip {
-  margin-top: 12px;
-  padding: 12px 16px;
-  background: rgba(71,232,160,0.04);
-  border: 1px solid rgba(71,232,160,0.15);
-  font-size: 11px;
-  color: #80c0a0;
-  line-height: 1.6;
-}
+.note-strip { margin-top: 12px; padding: 12px 16px; background: rgba(71,232,160,0.04); border: 1px solid rgba(71,232,160,0.15); font-size: 11px; color: #80c0a0; line-height: 1.6; }
 .note-strip strong { color: var(--p3); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 4px; }
-
-.parallel-strip {
-  margin-bottom: 16px;
-  padding: 12px 16px;
-  background: rgba(232,197,71,0.05);
-  border: 1px solid rgba(232,197,71,0.2);
-  font-size: 11px;
-  color: #c0a840;
-  line-height: 1.6;
-}
+.parallel-strip { margin-bottom: 16px; padding: 12px 16px; background: rgba(232,197,71,0.05); border: 1px solid rgba(232,197,71,0.2); font-size: 11px; color: #c0a840; line-height: 1.6; }
 .parallel-strip strong { color: var(--p1); }
 
-/* STACK TRACE SECTION */
-.stack-block {
-  margin-bottom: 64px;
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-left: 3px solid var(--p4);
-  padding: 28px 32px;
+/* NEW module callout */
+.new-module {
+  margin-top: 16px; padding: 16px 18px;
+  background: rgba(71,232,160,0.04);
+  border: 1px solid rgba(71,232,160,0.2);
+  border-left: 3px solid var(--p3);
 }
-.stack-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  color: var(--p4);
-  letter-spacing: 2px;
-  margin-bottom: 6px;
-}
-.stack-sub {
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-.behavior-compare {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-}
-.behavior-col {
-  background: var(--bg2);
-  padding: 20px;
-}
-.behavior-col-label {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
+.new-module-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--p3); margin-bottom: 8px; }
+.new-module p { font-size: 11px; color: #80c0a0; line-height: 1.7; margin-bottom: 10px; }
+
+/* STACK TRACE */
+.stack-block { margin-bottom: 64px; background: var(--card); border: 1px solid var(--border2); border-left: 3px solid var(--p4); padding: 28px 32px; }
+.stack-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--p4); letter-spacing: 2px; margin-bottom: 6px; }
+.stack-sub { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+.behavior-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+.behavior-col { background: var(--bg2); padding: 20px; }
+.behavior-col-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
 .behavior-col.bad .behavior-col-label { color: var(--p4); }
 .behavior-col.good .behavior-col-label { color: var(--p3); }
 .behavior-steps { display: flex; flex-direction: column; gap: 6px; }
-.bstep {
-  font-size: 11px;
-  padding: 6px 10px;
-  line-height: 1.5;
-}
+.bstep { font-size: 11px; padding: 6px 10px; line-height: 1.5; }
 .bad .bstep { color: #a06070; background: rgba(232,71,106,0.04); border-left: 2px solid rgba(232,71,106,0.2); }
 .good .bstep { color: #70a080; background: rgba(71,232,160,0.04); border-left: 2px solid rgba(71,232,160,0.2); }
 
 /* TIMELINE */
-.timeline-block {
-  margin-bottom: 64px;
-  background: var(--card);
-  border: 1px solid var(--border2);
-  overflow: hidden;
-}
-.tl-header {
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
-  font-size: 9px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: grid;
-  grid-template-columns: 1fr 100px 160px;
-  gap: 16px;
-}
-.tl-row {
-  padding: 12px 24px;
-  border-bottom: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: 1fr 100px 160px;
-  gap: 16px;
-  align-items: center;
-  transition: background 0.15s;
-}
+.timeline-block { margin-bottom: 64px; background: var(--card); border: 1px solid var(--border2); overflow: hidden; }
+.tl-header { padding: 20px 24px; border-bottom: 1px solid var(--border); font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); display: grid; grid-template-columns: 1fr 100px 160px; gap: 16px; }
+.tl-row { padding: 12px 24px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 100px 160px; gap: 16px; align-items: center; transition: background 0.15s; }
 .tl-row:hover { background: var(--bg2); }
 .tl-row:last-child { border-bottom: none; }
-.tl-row.total {
-  background: var(--bg2);
-  border-top: 1px solid var(--border2);
-}
+.tl-row.total { background: var(--bg2); border-top: 1px solid var(--border2); }
 .tl-phase { font-size: 12px; color: var(--text); }
 .tl-phase span { font-size: 10px; color: var(--muted); display: block; margin-top: 2px; }
+.tl-phase .new-badge { font-size: 8px; letter-spacing: 2px; color: var(--p3); border: 1px solid var(--p3); padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
 .tl-hrs { font-size: 13px; color: var(--p1); font-weight: 600; }
 .tl-dur { font-size: 12px; color: var(--p3); }
 .tl-row.total .tl-phase { font-size: 13px; color: var(--white); font-weight: 600; }
 .tl-row.total .tl-hrs { font-size: 16px; }
 
 /* WEEKLY */
-.weekly-block {
-  margin-bottom: 64px;
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-top: 2px solid var(--p3);
-  padding: 28px 32px;
-}
-.weekly-title {
-  font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--p3); margin-bottom: 20px;
-}
-.weekly-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-  background: var(--border);
-}
-.weekly-item {
-  background: var(--bg2);
-  padding: 16px 18px;
-}
-.weekly-item strong {
-  display: block; font-size: 12px; color: var(--white); margin-bottom: 4px;
-}
+.weekly-block { margin-bottom: 64px; background: var(--card); border: 1px solid var(--border2); border-top: 2px solid var(--p3); padding: 28px 32px; }
+.weekly-title { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--p3); margin-bottom: 20px; }
+.weekly-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+.weekly-item { background: var(--bg2); padding: 16px 18px; }
+.weekly-item strong { display: block; font-size: 12px; color: var(--white); margin-bottom: 4px; }
 .weekly-item p { font-size: 11px; color: var(--muted); line-height: 1.5; }
 
 /* FAILURE */
 .failure-block { margin-bottom: 64px; }
-.failure-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
-  color: var(--p4);
-  letter-spacing: 3px;
-  margin-bottom: 16px;
-}
+.failure-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--p4); letter-spacing: 3px; margin-bottom: 16px; }
 .failure-list { display: flex; flex-direction: column; gap: 1px; }
-.failure-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 14px 18px;
-  font-size: 12px;
-  color: #906070;
-  display: flex; gap: 14px; align-items: flex-start;
-  line-height: 1.5;
-  transition: border-color 0.2s, background 0.2s;
-}
-.failure-item:hover {
-  border-color: rgba(232,71,106,0.3);
-  background: rgba(232,71,106,0.03);
-}
+.failure-item { background: var(--card); border: 1px solid var(--border); padding: 14px 18px; font-size: 12px; color: #906070; display: flex; gap: 14px; align-items: flex-start; line-height: 1.5; transition: border-color 0.2s, background 0.2s; }
+.failure-item:hover { border-color: rgba(232,71,106,0.3); background: rgba(232,71,106,0.03); }
 .failure-item .x { color: var(--p4); flex-shrink: 0; font-weight: 700; }
 
-/* TRUTH BLOCK */
-.truth-block {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  padding: 32px;
-  text-align: center;
-  margin-bottom: 64px;
-  position: relative;
-  overflow: hidden;
-}
-.truth-block::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--p1), transparent);
-}
-.truth-quote {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(20px, 4vw, 32px);
-  color: var(--white);
-  line-height: 1.3;
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-}
+/* TRUTH */
+.truth-block { background: var(--card); border: 1px solid var(--border2); padding: 32px; text-align: center; margin-bottom: 64px; position: relative; overflow: hidden; }
+.truth-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--p1), transparent); }
+.truth-quote { font-family: 'Bebas Neue', sans-serif; font-size: clamp(20px, 4vw, 32px); color: var(--white); line-height: 1.3; letter-spacing: 1px; margin-bottom: 16px; }
 .truth-quote em { color: var(--p1); font-style: normal; }
-.truth-sub {
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.7;
-  max-width: 540px;
-  margin: 0 auto;
-}
+.truth-sub { font-size: 11px; color: var(--muted); line-height: 1.7; max-width: 540px; margin: 0 auto; }
 
 /* PROGRESS BAR */
 .progress-bar-wrap {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 999;
-  background: rgba(8,8,16,0.92);
-  border-bottom: 1px solid var(--border);
-  padding: 10px 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: rgba(8,8,16,0.92); border-bottom: 1px solid var(--border);
+  padding: 10px 24px; display: flex; align-items: center; gap: 16px;
   backdrop-filter: blur(8px);
-  transform: translateY(-100%);
-  transition: transform 0.3s ease;
+  transform: translateY(-100%); transition: transform 0.3s ease;
 }
 .progress-bar-wrap.visible { transform: translateY(0); }
-.progress-label {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.progress-track {
-  flex: 1;
-  height: 3px;
-  background: var(--border2);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--p1), var(--p3));
-  border-radius: 2px;
-  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-  width: 0%;
-}
-.progress-count {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px;
-  color: var(--p1);
-  flex-shrink: 0;
-  letter-spacing: 1px;
-  min-width: 48px;
-  text-align: right;
-}
-.progress-dots {
-  display: flex; gap: 5px; align-items: center; flex-shrink: 0;
-}
-.pdot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  border: 1px solid var(--border2);
-  background: transparent;
-  transition: background 0.3s, border-color 0.3s, transform 0.2s;
-}
-.pdot.done {
-  background: var(--p3);
-  border-color: var(--p3);
-  transform: scale(1.2);
-}
+.progress-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.progress-track { flex: 1; height: 3px; background: var(--border2); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--p1), var(--p3)); border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); width: 0%; }
+.progress-count { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--p1); flex-shrink: 0; letter-spacing: 1px; min-width: 48px; text-align: right; }
+.progress-dots { display: flex; gap: 5px; align-items: center; flex-shrink: 0; }
+.pdot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--border2); background: transparent; transition: background 0.3s, border-color 0.3s, transform 0.2s; }
+.pdot.done { background: var(--p3); border-color: var(--p3); transform: scale(1.2); }
 
 /* DONE BUTTON */
 .done-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
-  padding: 10px 16px;
-  background: transparent;
-  border: 1px solid var(--border2);
-  color: var(--muted);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 20px; padding: 10px 16px;
+  background: transparent; border: 1px solid var(--border2);
+  color: var(--muted); font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s;
   width: fit-content;
 }
-.done-btn:hover {
-  border-color: var(--p3);
-  color: var(--p3);
-}
-.done-btn .check-icon {
-  width: 16px; height: 16px;
-  border: 1px solid currentColor;
-  border-radius: 2px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px;
-  transition: background 0.2s;
-  flex-shrink: 0;
-}
+.done-btn:hover { border-color: var(--p3); color: var(--p3); }
+.done-btn .check-icon { width: 16px; height: 16px; border: 1px solid currentColor; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 10px; transition: background 0.2s; flex-shrink: 0; }
 
 /* PHASE DONE STATE */
-.phase.done {
-  border-color: rgba(71,232,160,0.25);
-  background: rgba(71,232,160,0.02);
-}
-.phase.done .phase-color-bar {
-  background: var(--p3) !important;
-}
-.phase.done .phase-name {
-  color: var(--p3);
-}
-.phase.done .phase-num-badge {
-  color: var(--p3) !important;
-  border-color: var(--p3) !important;
-}
-.phase.done .done-btn {
-  border-color: var(--p3);
-  color: var(--p3);
-  background: rgba(71,232,160,0.06);
-}
-.phase.done .done-btn .check-icon {
-  background: var(--p3);
-  color: var(--bg);
-  border-color: var(--p3);
-}
-.done-stamp {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--p3);
-  margin-left: 12px;
-}
+.phase.done { border-color: rgba(71,232,160,0.25); background: rgba(71,232,160,0.02); }
+.phase.done .phase-color-bar { background: var(--p3) !important; }
+.phase.done .phase-name { color: var(--p3); }
+.phase.done .phase-num-badge { color: var(--p3) !important; border-color: var(--p3) !important; }
+.phase.done .done-btn { border-color: var(--p3); color: var(--p3); background: rgba(71,232,160,0.06); }
+.phase.done .done-btn .check-icon { background: var(--p3); color: var(--bg); border-color: var(--p3); }
+.done-stamp { display: none; align-items: center; gap: 6px; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--p3); margin-left: 12px; }
 .phase.done .done-stamp { display: flex; }
 
-/* COMPLETION FLASH */
-@keyframes completionFlash {
-  0% { opacity: 0; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.05); }
-  100% { opacity: 0; transform: scale(1.1); }
-}
-.completion-toast {
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--card);
-  border: 1px solid var(--p3);
-  padding: 20px 36px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  color: var(--p3);
-  letter-spacing: 3px;
-  z-index: 9999;
-  pointer-events: none;
-  display: none;
-}
-.completion-toast.show {
-  display: block;
-  animation: completionFlash 1.2s ease forwards;
-}
+/* TOAST */
+@keyframes completionFlash { 0%{opacity:0;transform:translate(-50%,-50%) scale(0.8)} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)} 100%{opacity:0;transform:translate(-50%,-50%) scale(1.1)} }
+.completion-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--card); border: 1px solid var(--p3); padding: 20px 36px; font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--p3); letter-spacing: 3px; z-index: 9999; pointer-events: none; display: none; }
+.completion-toast.show { display: block; animation: completionFlash 1.2s ease forwards; }
 
 /* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.hero > * { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+.hero-eyebrow{animation-delay:0.1s} .hero-title{animation-delay:0.2s} .hero-sub{animation-delay:0.3s} .hero-stats{animation-delay:0.4s} .scroll-hint{animation-delay:0.6s}
+
+@media(max-width:600px){
+  .daily-grid{grid-template-columns:1fr}
+  .behavior-compare{grid-template-columns:1fr}
+  .tl-header,.tl-row{grid-template-columns:1fr 80px}
+  .tl-header>*:last-child,.tl-row>*:last-child{display:none}
+  .weekly-grid{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--border2)}
+  .stat:last-child{border-bottom:none}
 }
-.hero > * {
-  opacity: 0;
-  animation: fadeUp 0.6s ease forwards;
+@media(min-width:1280px){
+  body{cursor:auto}
+  .cursor,.cursor-ring{display:none!important}
+  .wrap{max-width:1380px;padding:0 40px 140px}
+  .hero{min-height:84vh;padding:72px 0 84px}
+  .hero-title{font-size:clamp(96px,9vw,168px);line-height:0.92}
+  .hero-stats{width:100%;max-width:980px}
+  .stat{flex:1 1 0;min-width:160px}
+  .daily-card,.stack-block,.weekly-block,.truth-block{padding:34px 38px}
+  .daily-grid,.weekly-grid{grid-template-columns:repeat(4,1fr)}
+  .tl-header{grid-template-columns:minmax(0,1.5fr) 120px 180px;padding:22px 28px}
+  .tl-row{grid-template-columns:minmax(0,1.5fr) 120px 180px;padding:14px 28px}
+  .phases{gap:12px}
+  .phase-bar{min-height:76px}
+  .phase-color-bar{width:8px}
+  .phase-inner{gap:20px;padding:18px 24px}
+  .phase-name{font-size:20px}
 }
-.hero-eyebrow { animation-delay: 0.1s; }
-.hero-title { animation-delay: 0.2s; }
-.hero-sub { animation-delay: 0.3s; }
-.hero-stats { animation-delay: 0.4s; }
-.scroll-hint { animation-delay: 0.6s; }
-
-@media (max-width: 600px) {
-  .daily-grid { grid-template-columns: 1fr; }
-  .behavior-compare { grid-template-columns: 1fr; }
-  .tl-header, .tl-row { grid-template-columns: 1fr 80px; }
-  .tl-header > *:last-child, .tl-row > *:last-child { display: none; }
-  .weekly-grid { grid-template-columns: 1fr; }
-  .hero-stats { flex-direction: column; }
-  .stat { border-right: none; border-bottom: 1px solid var(--border2); }
-  .stat:last-child { border-bottom: none; }
-}
-
-
-/* PC FIX PATCH - original-structure safe */
-@media (min-width: 1280px) {
-  body {
-    cursor: auto;
-  }
-
-  .cursor,
-  .cursor-ring {
-    display: none !important;
-  }
-
-  .wrap {
-    max-width: 1380px;
-    padding: 0 40px 140px;
-  }
-
-  .hero {
-    min-height: 84vh;
-    padding: 72px 0 84px;
-  }
-
-  .hero-title {
-    font-size: clamp(96px, 9vw, 168px);
-    line-height: 0.92;
-  }
-
-  .hero-sub {
-    font-size: 12px;
-    letter-spacing: 2.2px;
-    max-width: 88ch;
-  }
-
-  .hero-stats {
-    width: 100%;
-    max-width: 980px;
-  }
-
-  .stat {
-    flex: 1 1 0;
-    min-width: 170px;
-  }
-
-  .daily-card,
-  .stack-block,
-  .weekly-block,
-  .truth-block {
-    padding: 34px 38px;
-  }
-
-  .daily-grid,
-  .weekly-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .daily-slot,
-  .weekly-item {
-    min-height: 100%;
-  }
-
-  .timeline-block {
-    margin-bottom: 72px;
-  }
-
-  .tl-header {
-    grid-template-columns: minmax(0, 1.5fr) 120px 180px;
-    padding: 22px 28px;
-  }
-
-  .tl-row {
-    grid-template-columns: minmax(0, 1.5fr) 120px 180px;
-    padding: 14px 28px;
-  }
-
-  .phases {
-    gap: 12px;
-  }
-
-  .phase-bar {
-    min-height: 76px;
-  }
-
-  .phase-color-bar {
-    width: 8px;
-  }
-
-  .phase-inner {
-    grid-template-columns: 84px minmax(0, 1fr) 200px 24px;
-    gap: 20px;
-    padding: 18px 24px;
-    align-items: center;
-  }
-
-  .phase-name {
-    font-size: 24px;
-    line-height: 1.15;
-  }
-
-  .phase-meta {
-    align-items: flex-end;
-  }
-
-  .phase-hrs {
-    font-size: 13px;
-  }
-
-  .phase-weeks {
-    font-size: 11px;
-  }
-
-  .phase-body {
-    padding: 0 24px 28px 32px;
-  }
-
-  .pb-section {
-    margin-top: 24px;
-  }
-
-  .pb-label {
-    font-size: 10px;
-  }
-
-  .tags {
-    gap: 8px;
-  }
-
-  .tag-item {
-    font-size: 12px;
-    padding: 6px 11px;
-  }
-
-  .phase-list,
-  .resource-list,
-  .failure-item,
-  .truth-sub,
-  .daily-note,
-  .stack-item,
-  .weekly-item p,
-  .tl-phase,
-  .tl-dur {
-    font-size: 13px;
-    line-height: 1.8;
-  }
-
-  .failure-item {
-    padding: 18px 22px;
-  }
-
-  .progress-bar-wrap {
-    padding: 12px 32px;
-    gap: 20px;
-  }
-
-  .progress-track {
-    max-width: 520px;
-  }
-}
-
-@media (min-width: 1600px) {
-  .wrap {
-    max-width: 1480px;
-  }
-
-  .hero-title {
-    font-size: clamp(112px, 8vw, 188px);
-  }
-}
-
 </style>
 </head>
 <body>
-
 <div class="cursor" id="cur"></div>
 <div class="cursor-ring" id="ring"></div>
 
 <!-- PROGRESS BAR -->
 <div class="progress-bar-wrap" id="progressBar">
   <span class="progress-label">Progress</span>
-  <div class="progress-track">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
   <div class="progress-dots" id="progressDots"></div>
-  <div class="progress-count" id="progressCount">0/6</div>
+  <div class="progress-count" id="progressCount">0/9</div>
 </div>
 
-<!-- COMPLETION TOAST -->
 <div class="completion-toast" id="toast"></div>
 
 <div class="wrap">
-
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-eyebrow">Backend Dev Roadmap · v3.0 · Java → Spring Boot → Deployed</div>
+    <div class="hero-eyebrow">Backend Dev Roadmap · v4.0 · Java → Spring Boot → Deployed → Hired</div>
     <h1 class="hero-title">BACK<br><span class="accent">END.</span></h1>
-    <p class="hero-sub">Java · Spring Boot · PostgreSQL · Deployed · Job-Ready</p>
+    <p class="hero-sub">Java · Spring Boot · PostgreSQL · Redis · Docker · Job-Ready</p>
     <div class="hero-stats">
       <div class="stat">
-        <div class="stat-val">620–800</div>
+        <div class="stat-val">705–940</div>
         <div class="stat-label">Realistic Hours</div>
       </div>
       <div class="stat">
-        <div class="stat-val">5–7</div>
+        <div class="stat-val">7–10</div>
         <div class="stat-label">Months (3–4 hrs/day)</div>
       </div>
       <div class="stat">
-        <div class="stat-val">7</div>
+        <div class="stat-val">9</div>
         <div class="stat-label">Phases</div>
       </div>
       <div class="stat">
         <div class="stat-val">DSA∥</div>
-        <div class="stat-label">Parallel from P2</div>
+        <div class="stat-label">Parallel from P3</div>
       </div>
     </div>
     <div class="scroll-hint">scroll to begin</div>
@@ -961,7 +389,7 @@ body::after {
       </div>
       <div class="daily-slot ds2">
         <div class="daily-num">1 <sub>hr</sub></div>
-        <div class="daily-desc">DSA problems<br>From Phase 2 onward</div>
+        <div class="daily-desc">DSA problems<br>From Phase 3 onward</div>
       </div>
       <div class="daily-slot ds3">
         <div class="daily-num">30 <sub>min</sub></div>
@@ -978,41 +406,26 @@ body::after {
   <div class="section-label">Phases</div>
   <div class="phases">
 
-    <!-- P1 -->
+    <!-- P1: Frontend -->
     <div class="phase open" data-phase="1" data-color="var(--p1)">
       <div class="phase-bar" onclick="toggle(this)">
         <div class="phase-color-bar" style="background:var(--p1)"></div>
         <div class="phase-inner">
           <span class="phase-num-badge" style="color:var(--p1)">P1</span>
-          <span class="phase-name">Java + Frontend Basics + Problem Solving</span>
+          <span class="phase-name">Frontend (Hard Cap)</span>
           <span class="done-stamp">✓ Completed</span>
           <div class="phase-meta">
-            <span class="phase-hrs">130–160 hrs</span>
-            <span class="phase-weeks" style="background:var(--p1)">4–5 WKS</span>
+            <span class="phase-hrs">20–30 hrs</span>
+            <span class="phase-weeks" style="background:var(--p1)">1 WK</span>
           </div>
           <span class="phase-chevron">▾</span>
         </div>
       </div>
       <div class="phase-body">
         <div class="pb-section">
-          <div class="pb-label">Java Topics</div>
+          <div class="pb-label">Topics</div>
           <div class="tags">
-            <span class="tag-item">Variables & Types</span>
-            <span class="tag-item">Control Flow</span>
-            <span class="tag-item">Arrays & Strings</span>
-            <span class="tag-item">Methods</span>
-            <span class="tag-item">OOP Basics</span>
-            <span class="tag-item">Classes & Objects</span>
-            <span class="tag-item">Inheritance</span>
-            <span class="tag-item">Interfaces</span>
-            <span class="tag-item">Collections</span>
-            <span class="tag-item">Exception Handling</span>
-          </div>
-        </div>
-        <div class="pb-section">
-          <div class="pb-label">Frontend (Hard Cap — 20–30 hrs total)</div>
-          <div class="tags">
-            <span class="tag-item">HTML structure</span>
+            <span class="tag-item">HTML basics</span>
             <span class="tag-item">CSS basics</span>
             <span class="tag-item">JS fetch()</span>
             <span class="tag-item">DOM manipulation</span>
@@ -1022,32 +435,73 @@ body::after {
         <div class="pb-section">
           <div class="pb-label">Output</div>
           <div class="output-rows">
-            <div class="output-row">80–120 quality problems solved (Easy → low Medium)</div>
-            <div class="output-row">2–3 small Java console programs</div>
-            <div class="output-row highlight">1 simple UI that calls a backend API</div>
+            <div class="output-row highlight">1 simple UI calling a backend API</div>
           </div>
         </div>
         <div class="warn-strip">
-          <strong>⚠ Trap</strong>
-          Frontend hard cap is 20–30 hrs. Cross that → you're procrastinating backend. The UI just needs to work, not impress. Also: 80–120 solid problems beats farming 200 easy ones.
+          <strong>⚠ Hard Cap</strong>
+          Cross 30 hrs here and you're procrastinating backend. The UI just needs to work, not impress. Stop and move on.
         </div>
-        <button class="done-btn" onclick="markDone(this, 1)">
-          <span class="check-icon">✓</span>Mark Phase Done
-        </button>
+        <button class="done-btn" onclick="markDone(this, 1)"><span class="check-icon">✓</span>Mark Phase Done</button>
       </div>
     </div>
 
-    <!-- P2 -->
+    <!-- P2: Java -->
     <div class="phase" data-phase="2" data-color="var(--p2)">
       <div class="phase-bar" onclick="toggle(this)">
         <div class="phase-color-bar" style="background:var(--p2)"></div>
         <div class="phase-inner">
           <span class="phase-num-badge" style="color:var(--p2)">P2</span>
-          <span class="phase-name">Spring Boot Core</span>
+          <span class="phase-name">Java + Problem Solving</span>
           <span class="done-stamp">✓ Completed</span>
           <div class="phase-meta">
-            <span class="phase-hrs">150–190 hrs</span>
-            <span class="phase-weeks" style="background:var(--p2); color:#080810">5–6 WKS</span>
+            <span class="phase-hrs">100–130 hrs</span>
+            <span class="phase-weeks" style="background:var(--p2);color:#080810">3–4 WKS</span>
+          </div>
+          <span class="phase-chevron">▾</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="pb-section">
+          <div class="pb-label">Topics</div>
+          <div class="tags">
+            <span class="tag-item">Variables & Types</span>
+            <span class="tag-item">Control Flow</span>
+            <span class="tag-item">Arrays & Strings</span>
+            <span class="tag-item">OOP Basics</span>
+            <span class="tag-item">Classes & Objects</span>
+            <span class="tag-item">Inheritance</span>
+            <span class="tag-item">Interfaces</span>
+            <span class="tag-item">Collections</span>
+            <span class="tag-item">Exception Handling</span>
+          </div>
+        </div>
+        <div class="pb-section">
+          <div class="pb-label">Output</div>
+          <div class="output-rows">
+            <div class="output-row">80–120 quality problems (Easy → low Medium)</div>
+            <div class="output-row">2–3 small Java console programs</div>
+          </div>
+        </div>
+        <div class="warn-strip">
+          <strong>⚠ Trap</strong>
+          150–200 problems here is overkill. That becomes easy-problem farming and delays backend. Hit 80–120 solid problems and move on.
+        </div>
+        <button class="done-btn" onclick="markDone(this, 2)"><span class="check-icon">✓</span>Mark Phase Done</button>
+      </div>
+    </div>
+
+    <!-- P3: Spring Boot + Networking -->
+    <div class="phase" data-phase="3" data-color="var(--p3)">
+      <div class="phase-bar" onclick="toggle(this)">
+        <div class="phase-color-bar" style="background:var(--p3)"></div>
+        <div class="phase-inner">
+          <span class="phase-num-badge" style="color:var(--p3)">P3</span>
+          <span class="phase-name">Spring Boot Core + Networking Basics</span>
+          <span class="done-stamp">✓ Completed</span>
+          <div class="phase-meta">
+            <span class="phase-hrs">170–220 hrs</span>
+            <span class="phase-weeks" style="background:var(--p3);color:#080810">6–7 WKS</span>
           </div>
           <span class="phase-chevron">▾</span>
         </div>
@@ -1057,35 +511,34 @@ body::after {
           <strong>⟳ DSA starts here.</strong> 1–2 LeetCode problems daily from now. Don't wait for Phase 7. Patterns compound — starting late means cramming.
         </div>
         <div class="pb-section">
-          <div class="pb-label">Core Topics</div>
+          <div class="pb-label">Spring Boot Core (150–190 hrs)</div>
           <div class="tags">
-            <span class="tag-item">HTTP + REST concepts</span>
+            <span class="tag-item">HTTP + REST</span>
             <span class="tag-item">Spring Boot setup</span>
             <span class="tag-item">Controllers</span>
             <span class="tag-item">Services & Repositories</span>
             <span class="tag-item">Spring Data JPA</span>
             <span class="tag-item">Spring Security</span>
             <span class="tag-item">JWT Auth</span>
-            <span class="tag-item">Request/Response DTOs</span>
+            <span class="tag-item">DTOs</span>
           </div>
         </div>
         <div class="pb-section">
-          <div class="pb-label">Testing — Added</div>
+          <div class="pb-label">Testing</div>
           <div class="tags">
-            <span class="tag-item new">JUnit 5</span>
-            <span class="tag-item new">Mockito</span>
-            <span class="tag-item new">MockMvc basics</span>
+            <span class="tag-item new">JUnit 5 + Mockito</span>
+            <span class="tag-item new">MockMvc — test controllers</span>
           </div>
         </div>
         <div class="pb-section">
-          <div class="pb-label">Logging — Added</div>
+          <div class="pb-label">Logging</div>
           <div class="tags">
             <span class="tag-item new">SLF4J / Logback</span>
             <span class="tag-item new">Structured logs (not System.out.println)</span>
           </div>
         </div>
         <div class="pb-section">
-          <div class="pb-label">Security Hygiene — Added</div>
+          <div class="pb-label">Security Hygiene</div>
           <div class="tags">
             <span class="tag-item new">BCrypt password hashing</span>
             <span class="tag-item new">CORS configuration</span>
@@ -1095,17 +548,31 @@ body::after {
           </div>
         </div>
         <div class="pb-section">
-          <div class="pb-label">Async Basics — Added (10–15 hrs)</div>
+          <div class="pb-label">API Documentation</div>
+          <div class="tags">
+            <span class="tag-item new">Swagger UI / OpenAPI — document every project</span>
+          </div>
+        </div>
+        <div class="pb-section">
+          <div class="pb-label">Async Basics (10–15 hrs)</div>
           <div class="tags">
             <span class="tag-item new">Threads & thread pools</span>
             <span class="tag-item new">@Async in Spring</span>
             <span class="tag-item new">Race condition awareness</span>
           </div>
         </div>
-        <div class="pb-section">
-          <div class="pb-label">API Documentation — Added</div>
+        <div class="new-module">
+          <div class="new-module-label">★ New Module · Networking Basics (10–15 hrs)</div>
+          <p>Stop treating backend as magic. Developers who skip this become framework operators — they can use Spring but can't debug what's actually happening.</p>
           <div class="tags">
-            <span class="tag-item new">Swagger UI / OpenAPI</span>
+            <span class="tag-item new">Request/response lifecycle</span>
+            <span class="tag-item new">TCP vs HTTP</span>
+            <span class="tag-item new">DNS basics</span>
+            <span class="tag-item new">HTTP headers & status codes in depth</span>
+            <span class="tag-item new">Cookies vs sessions vs tokens</span>
+            <span class="tag-item new">Latency & design impact</span>
+            <span class="tag-item new">Reverse proxy basics (Nginx)</span>
+            <span class="tag-item new">Load balancing (conceptually)</span>
           </div>
         </div>
         <div class="pb-section">
@@ -1119,25 +586,23 @@ body::after {
         </div>
         <div class="warn-strip">
           <strong>⚠ Reality Check</strong>
-          Spring Security + JWT alone will eat 15–20 hrs of confusion. This is normal. Read the stack trace — don't paste the error into YouTube.
+          Spring Security + JWT alone will eat 15–20 hrs of confusion. Normal. Read the stack trace — don't copy the error into YouTube.
         </div>
-        <button class="done-btn" onclick="markDone(this, 2)">
-          <span class="check-icon">✓</span>Mark Phase Done
-        </button>
+        <button class="done-btn" onclick="markDone(this, 3)"><span class="check-icon">✓</span>Mark Phase Done</button>
       </div>
     </div>
 
-    <!-- P3 -->
-    <div class="phase" data-phase="3" data-color="var(--p3)">
+    <!-- P4: Databases -->
+    <div class="phase" data-phase="4" data-color="var(--p4)">
       <div class="phase-bar" onclick="toggle(this)">
-        <div class="phase-color-bar" style="background:var(--p3)"></div>
+        <div class="phase-color-bar" style="background:var(--p4)"></div>
         <div class="phase-inner">
-          <span class="phase-num-badge" style="color:var(--p3)">P3</span>
+          <span class="phase-num-badge" style="color:var(--p4)">P4</span>
           <span class="phase-name">Databases</span>
           <span class="done-stamp">✓ Completed</span>
           <div class="phase-meta">
             <span class="phase-hrs">50–70 hrs</span>
-            <span class="phase-weeks" style="background:var(--p3); color:#080810">2–3 WKS</span>
+            <span class="phase-weeks" style="background:var(--p4)">2–3 WKS</span>
           </div>
           <span class="phase-chevron">▾</span>
         </div>
@@ -1166,23 +631,21 @@ body::after {
             <div class="output-row">50+ SQL problems (LeetCode SQL / SQLZoo)</div>
           </div>
         </div>
-        <button class="done-btn" onclick="markDone(this, 3)">
-          <span class="check-icon">✓</span>Mark Phase Done
-        </button>
+        <button class="done-btn" onclick="markDone(this, 4)"><span class="check-icon">✓</span>Mark Phase Done</button>
       </div>
     </div>
 
-    <!-- P4 -->
-    <div class="phase" data-phase="4" data-color="var(--p4)">
+    <!-- P5: Intermediate Backend -->
+    <div class="phase" data-phase="5" data-color="var(--p5)">
       <div class="phase-bar" onclick="toggle(this)">
-        <div class="phase-color-bar" style="background:var(--p4)"></div>
+        <div class="phase-color-bar" style="background:var(--p5)"></div>
         <div class="phase-inner">
-          <span class="phase-num-badge" style="color:var(--p4)">P4</span>
+          <span class="phase-num-badge" style="color:var(--p5)">P5</span>
           <span class="phase-name">Intermediate Backend</span>
           <span class="done-stamp">✓ Completed</span>
           <div class="phase-meta">
             <span class="phase-hrs">60–80 hrs</span>
-            <span class="phase-weeks" style="background:var(--p4)">2–3 WKS</span>
+            <span class="phase-weeks" style="background:var(--p5)">2–3 WKS</span>
           </div>
           <span class="phase-chevron">▾</span>
         </div>
@@ -1212,86 +675,165 @@ body::after {
         </div>
         <div class="note-strip">
           <strong>→ Milestone</strong>
-          This is where code stops looking like a tutorial copy. Validation, logging, error messages — the polish layer is what separates "built it" from "it's production-aware."
+          This is where code stops looking like a tutorial copy. Validation, logging, error messages — the polish layer separates "built it" from "it's production-aware."
         </div>
-        <button class="done-btn" onclick="markDone(this, 4)">
-          <span class="check-icon">✓</span>Mark Phase Done
-        </button>
+        <button class="done-btn" onclick="markDone(this, 5)"><span class="check-icon">✓</span>Mark Phase Done</button>
       </div>
     </div>
 
-    <!-- P5 -->
-    <div class="phase" data-phase="5" data-color="var(--p5)">
+    <!-- P6: Deployment + Linux -->
+    <div class="phase" data-phase="6" data-color="var(--p6)">
       <div class="phase-bar" onclick="toggle(this)">
-        <div class="phase-color-bar" style="background:var(--p5)"></div>
+        <div class="phase-color-bar" style="background:var(--p6)"></div>
         <div class="phase-inner">
-          <span class="phase-num-badge" style="color:var(--p5)">P5</span>
-          <span class="phase-name">Deployment + Polish</span>
+          <span class="phase-num-badge" style="color:var(--p6)">P6</span>
+          <span class="phase-name">Deployment + Linux + Git + Polish</span>
           <span class="done-stamp">✓ Completed</span>
           <div class="phase-meta">
-            <span class="phase-hrs">50–70 hrs</span>
-            <span class="phase-weeks" style="background:var(--p5)">2–3 WKS</span>
+            <span class="phase-hrs">80–110 hrs</span>
+            <span class="phase-weeks" style="background:var(--p6);color:#080810">3–4 WKS</span>
           </div>
           <span class="phase-chevron">▾</span>
         </div>
       </div>
       <div class="phase-body">
         <div class="pb-section">
-          <div class="pb-label">Deployment Topics</div>
+          <div class="pb-label">Git + Deployment (30–40 hrs)</div>
           <div class="tags">
             <span class="tag-item">Git branching + PRs</span>
             <span class="tag-item">.env management</span>
             <span class="tag-item">Render / Railway deploy</span>
             <span class="tag-item">Environment configs</span>
-            <span class="tag-item new">README writing</span>
-            <span class="tag-item new">Basic Docker (1 app only)</span>
+            <span class="tag-item new">Basic Docker (containerize 1 app only)</span>
+          </div>
+        </div>
+        <div class="new-module">
+          <div class="new-module-label">★ New Module · Linux + Terminal (15–20 hrs)</div>
+          <p>You cannot deploy comfortably without this. Skipping it turns every deployment into copy-paste ritual engineering — you paste commands, something breaks, and you have no idea why.</p>
+          <div class="tags">
+            <span class="tag-item new">Bash basics (navigation, file ops, permissions)</span>
+            <span class="tag-item new">SSH + key pair setup</span>
+            <span class="tag-item new">vim / nano basics</span>
+            <span class="tag-item new">systemctl (start, stop, restart)</span>
+            <span class="tag-item new">Process management (ps, kill, lsof)</span>
+            <span class="tag-item new">Logs (tail -f, grep)</span>
+            <span class="tag-item new">Environment variables (.env, export)</span>
+            <span class="tag-item new">curl — test endpoints from terminal</span>
+            <span class="tag-item new">grep + find basics</span>
           </div>
         </div>
         <div class="pb-section">
-          <div class="pb-label">Project Polish (20–30 hrs across all projects)</div>
+          <div class="pb-label">Project Polish (~30–50 hrs across all projects)</div>
           <div class="tags">
             <span class="tag-item new">Clean folder structure</span>
             <span class="tag-item new">README + setup + API docs + screenshots</span>
             <span class="tag-item new">Swagger UI live on deployed project</span>
             <span class="tag-item new">Remove dead code, improve naming</span>
             <span class="tag-item new">Validation + tests + proper logging</span>
+            <span class="tag-item new">Deploy cleanly with public URL</span>
           </div>
         </div>
         <div class="pb-section">
           <div class="pb-label">Output</div>
           <div class="output-rows">
             <div class="output-row highlight">All projects live with public URLs</div>
-            <div class="output-row highlight">Every project has clean README + Swagger docs</div>
+            <div class="output-row highlight">Every project has a clean README + Swagger docs</div>
+            <div class="output-row">Comfortable working on a remote Linux server without panic</div>
           </div>
         </div>
         <div class="warn-strip">
           <strong>⚠ Docker Trap</strong>
-          Containerize 1 app and stop. Docker networking deep-dives are Phase 8 territory. Don't lose a week here.
+          Containerize 1 app and stop. Deep networking and orchestration are not this phase. Don't lose a week here.
         </div>
-        <button class="done-btn" onclick="markDone(this, 5)">
-          <span class="check-icon">✓</span>Mark Phase Done
-        </button>
+        <button class="done-btn" onclick="markDone(this, 6)"><span class="check-icon">✓</span>Mark Phase Done</button>
       </div>
     </div>
 
-    <!-- P6 -->
-    <div class="phase" data-phase="6" data-color="var(--p6)">
+    <!-- P6.5: Positioning -->
+    <div class="phase" data-phase="7" data-color="var(--p65)">
       <div class="phase-bar" onclick="toggle(this)">
-        <div class="phase-color-bar" style="background:var(--p6)"></div>
+        <div class="phase-color-bar" style="background:var(--p65)"></div>
         <div class="phase-inner">
-          <span class="phase-num-badge" style="color:var(--p6)">P6</span>
-          <span class="phase-name">DSA — Serious Mode</span>
+          <span class="phase-num-badge" style="color:var(--p65)">P6.5</span>
+          <span class="phase-name">Positioning <span style="font-size:10px;letter-spacing:2px;color:var(--p65);border:1px solid var(--p65);padding:2px 8px;vertical-align:middle">NEW</span></span>
           <span class="done-stamp">✓ Completed</span>
           <div class="phase-meta">
-            <span class="phase-hrs">150–200 hrs</span>
-            <span class="phase-weeks" style="background:var(--p6); color:#080810">5–6 WKS</span>
+            <span class="phase-hrs">15–20 hrs</span>
+            <span class="phase-weeks" style="background:var(--p65)">1 WK</span>
           </div>
           <span class="phase-chevron">▾</span>
         </div>
       </div>
       <div class="phase-body">
         <div class="parallel-strip">
-          <strong>Not starting from zero.</strong> You've solved 200+ problems in parallel since Phase 2. This phase is pattern drilling, not introduction.
+          <strong>Why this exists.</strong> Invisible projects and weak resumes filter out good candidates before interviews start. "I'll do this after I get better" is how capable people stay unemployed for 6 extra months.
+        </div>
+        <div class="pb-section">
+          <div class="pb-label">Resume (4–5 hrs)</div>
+          <div class="tags">
+            <span class="tag-item new">Backend-focused bullets with impact framing</span>
+            <span class="tag-item new">Quantify wherever possible — estimates beat nothing</span>
+          </div>
+        </div>
+        <div class="note-strip">
+          <strong>→ Examples</strong>
+          "Built JWT auth system serving 500+ users" not "Implemented login" · "Reduced query time 40% via index optimization" not "Worked with databases"
+        </div>
+        <div class="pb-section">
+          <div class="pb-label">GitHub Hygiene (3–4 hrs)</div>
+          <div class="tags">
+            <span class="tag-item new">Clean repos with meaningful commit history</span>
+            <span class="tag-item new">Every pinned project: README + live URL + Swagger link</span>
+            <span class="tag-item new">No half-finished repos pinned</span>
+          </div>
+        </div>
+        <div class="pb-section">
+          <div class="pb-label">Project Demo Prep (4–5 hrs)</div>
+          <div class="tags">
+            <span class="tag-item new">Practice explaining each project's architecture out loud</span>
+            <span class="tag-item new">"Why JWT over sessions?", "How does auth flow work?"</span>
+            <span class="tag-item new">Walk through Swagger UI without hesitation</span>
+          </div>
+        </div>
+        <div class="pb-section">
+          <div class="pb-label">LinkedIn + Outreach (3–4 hrs)</div>
+          <div class="tags">
+            <span class="tag-item new">Concise, technical, specific</span>
+            <span class="tag-item new">List actual technologies with context</span>
+            <span class="tag-item new">30–50 target companies/roles list</span>
+          </div>
+        </div>
+        <div class="pb-section">
+          <div class="pb-label">Output</div>
+          <div class="output-rows">
+            <div class="output-row highlight">Polished, impact-framed resume</div>
+            <div class="output-row highlight">Clean GitHub profile — 3–4 deployed + documented projects</div>
+            <div class="output-row">2-minute technical pitch for each major project</div>
+            <div class="output-row">Target company/role list ready</div>
+          </div>
+        </div>
+        <button class="done-btn" onclick="markDone(this, 7)"><span class="check-icon">✓</span>Mark Phase Done</button>
+      </div>
+    </div>
+
+    <!-- P7: DSA Serious Mode -->
+    <div class="phase" data-phase="8" data-color="var(--p7)">
+      <div class="phase-bar" onclick="toggle(this)">
+        <div class="phase-color-bar" style="background:var(--p7)"></div>
+        <div class="phase-inner">
+          <span class="phase-num-badge" style="color:var(--p7)">P7</span>
+          <span class="phase-name">DSA — Serious Mode</span>
+          <span class="done-stamp">✓ Completed</span>
+          <div class="phase-meta">
+            <span class="phase-hrs">150–200 hrs</span>
+            <span class="phase-weeks" style="background:var(--p7)">5–6 WKS</span>
+          </div>
+          <span class="phase-chevron">▾</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="parallel-strip">
+          <strong>Not starting from zero.</strong> By now you've solved 200+ problems in parallel since P3. This phase is pattern drilling, not introduction.
         </div>
         <div class="pb-section">
           <div class="pb-label">Focus Patterns</div>
@@ -1312,30 +854,89 @@ body::after {
           <div class="pb-label">Targets</div>
           <div class="output-rows">
             <div class="output-row">300–500 problems total (including parallel phase)</div>
-            <div class="output-row">Pattern recognition over raw count</div>
             <div class="output-row">Time yourself: 20–25 min Easy · 35–45 min Medium</div>
+            <div class="output-row">Pattern recognition matters more than raw count</div>
           </div>
         </div>
-        <button class="done-btn" onclick="markDone(this, 6)">
-          <span class="check-icon">✓</span>Mark Phase Done
-        </button>
+        <div class="note-strip">
+          <strong>→ Critical Nuance</strong>
+          180–250 well-understood problems will outperform 500 pattern-memorized problems in backend-focused roles. Optimize for explaining your reasoning under pressure, not for hitting a number.
+        </div>
+        <button class="done-btn" onclick="markDone(this, 8)"><span class="check-icon">✓</span>Mark Phase Done</button>
       </div>
     </div>
 
-  </div>
+    <!-- P8: Capstone -->
+    <div class="phase" data-phase="9" data-color="var(--p8)">
+      <div class="phase-bar" onclick="toggle(this)">
+        <div class="phase-color-bar" style="background:var(--p8)"></div>
+        <div class="phase-inner">
+          <span class="phase-num-badge" style="color:var(--p8)">P8</span>
+          <span class="phase-name">Capstone Project <span style="font-size:10px;letter-spacing:2px;color:var(--p8);border:1px solid var(--p8);padding:2px 8px;vertical-align:middle">NEW</span></span>
+          <span class="done-stamp">✓ Completed</span>
+          <div class="phase-meta">
+            <span class="phase-hrs">60–80 hrs</span>
+            <span class="phase-weeks" style="background:var(--p8);color:#080810">2–3 WKS</span>
+          </div>
+          <span class="phase-chevron">▾</span>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="parallel-strip">
+          <strong>This is your resume centerpiece.</strong> Earlier projects proved you learned each skill. This one proves you can integrate them. Your interview anchor and most detailed technical talking point.
+        </div>
+        <div class="pb-section">
+          <div class="pb-label">Requirements (non-negotiable)</div>
+          <div class="tags">
+            <span class="tag-item new">Auth + roles (min 2 roles, different access levels)</span>
+            <span class="tag-item new">PostgreSQL — real schema, multiple tables + relationships</span>
+            <span class="tag-item new">Redis — caching or session management</span>
+            <span class="tag-item new">Pagination + filtering on major endpoint</span>
+            <span class="tag-item new">Structured logging throughout</span>
+            <span class="tag-item new">Unit + integration tests</span>
+            <span class="tag-item new">Docker (containerized deployment)</span>
+            <span class="tag-item new">Live deployment with public URL</span>
+            <span class="tag-item new">Swagger docs for every endpoint</span>
+            <span class="tag-item new">Rate limiting</span>
+            <span class="tag-item new">Clean README with architecture diagram</span>
+          </div>
+        </div>
+        <div class="pb-section">
+          <div class="pb-label">Project Ideas (pick one)</div>
+          <div class="output-rows">
+            <div class="output-row">Task management platform — users, projects, tasks, assignments, status tracking</div>
+            <div class="output-row">Expense tracking backend — auth, categories, monthly reports, multi-user</div>
+            <div class="output-row">Inventory management system — roles, stock tracking, low-stock alerts</div>
+            <div class="output-row">Event booking backend — auth, events, bookings, capacity enforcement</div>
+            <div class="output-row">Learning management backend — courses, modules, progress, enrollment</div>
+          </div>
+        </div>
+        <div class="note-strip">
+          <strong>→ What This Gives You</strong>
+          A concrete technical story for any interview. Architecture discussion material — "why Redis here?", "how'd you model the schema?", "how do you handle concurrent requests?" Proof you can finish something serious end-to-end.
+        </div>
+        <div class="warn-strip">
+          <strong>⚠ Floor, Not Ceiling</strong>
+          60–80 hrs is the minimum. Build it properly. This project will be shown to every employer.
+        </div>
+        <button class="done-btn" onclick="markDone(this, 9)"><span class="check-icon">✓</span>Mark Phase Done</button>
+      </div>
+    </div>
+
+  </div><!-- /phases -->
 
   <!-- STACK TRACE -->
   <div class="section-label">Critical Skill</div>
   <div class="stack-block">
     <div class="stack-title">Reading Stack Traces</div>
-    <div class="stack-sub">The skill that separates builders from quitters</div>
+    <div class="stack-sub">The skill that separates builders from quitters — non-negotiable</div>
     <div class="behavior-compare">
       <div class="behavior-col bad">
         <div class="behavior-col-label">Beginner behavior</div>
         <div class="behavior-steps">
           <div class="bstep">1. Error appears</div>
           <div class="bstep">2. Panic</div>
-          <div class="bstep">3. Copy error into YouTube</div>
+          <div class="bstep">3. Paste into YouTube</div>
           <div class="bstep">4. Switch tutorial</div>
         </div>
       </div>
@@ -1361,39 +962,54 @@ body::after {
       <span>Duration (3–4 hrs/day)</span>
     </div>
     <div class="tl-row">
-      <div class="tl-phase">P1 · Java + Frontend + DSA base<span>Frontend hard-capped at 20–30 hrs</span></div>
-      <div class="tl-hrs">130–160</div>
-      <div class="tl-dur">4–5 wks</div>
+      <div class="tl-phase">P1 · Frontend (Hard Cap)<span>Stop at 30 hrs. No exceptions.</span></div>
+      <div class="tl-hrs">20–30</div>
+      <div class="tl-dur">1 wk</div>
     </div>
     <div class="tl-row">
-      <div class="tl-phase">P2 · Spring Boot + testing + logging + security + async<span>DSA starts parallel here</span></div>
-      <div class="tl-hrs">150–190</div>
-      <div class="tl-dur">5–6 wks</div>
+      <div class="tl-phase">P2 · Java + Problem Solving<span>80–120 quality problems, not 200</span></div>
+      <div class="tl-hrs">100–130</div>
+      <div class="tl-dur">3–4 wks</div>
     </div>
     <div class="tl-row">
-      <div class="tl-phase">P3 · Databases<span>SQL runs daily throughout</span></div>
+      <div class="tl-phase">P3 · Spring Boot + Networking Basics<span>DSA starts parallel here</span></div>
+      <div class="tl-hrs">170–220</div>
+      <div class="tl-dur">6–7 wks</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-phase">P4 · Databases<span>SQL runs 30 min/day throughout</span></div>
       <div class="tl-hrs">50–70</div>
       <div class="tl-dur">2–3 wks</div>
     </div>
     <div class="tl-row">
-      <div class="tl-phase">P4 · Intermediate backend</div>
+      <div class="tl-phase">P5 · Intermediate Backend</div>
       <div class="tl-hrs">60–80</div>
       <div class="tl-dur">2–3 wks</div>
     </div>
     <div class="tl-row">
-      <div class="tl-phase">P5 · Deployment + polish<span>All projects go live here</span></div>
-      <div class="tl-hrs">50–70</div>
-      <div class="tl-dur">2–3 wks</div>
+      <div class="tl-phase">P6 · Deployment + Linux + Polish<span>All projects go live here</span></div>
+      <div class="tl-hrs">80–110</div>
+      <div class="tl-dur">3–4 wks</div>
     </div>
     <div class="tl-row">
-      <div class="tl-phase">P6 · DSA serious mode<span>Pattern drilling, not cold start</span></div>
+      <div class="tl-phase">P6.5 · Positioning <span class="new-badge">NEW</span><span>Don't delay this until after interviews start</span></div>
+      <div class="tl-hrs">15–20</div>
+      <div class="tl-dur">1 wk</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-phase">P7 · DSA Serious Mode<span>Pattern drilling, not cold start</span></div>
       <div class="tl-hrs">150–200</div>
       <div class="tl-dur">5–6 wks</div>
     </div>
+    <div class="tl-row">
+      <div class="tl-phase">P8 · Capstone Project <span class="new-badge">NEW</span><span>Resume centerpiece — build it properly</span></div>
+      <div class="tl-hrs">60–80</div>
+      <div class="tl-dur">2–3 wks</div>
+    </div>
     <div class="tl-row total">
-      <div class="tl-phase">Total (realistic)</div>
-      <div class="tl-hrs">590–770</div>
-      <div class="tl-dur" style="color:var(--p1); font-weight:600;">5–7 months</div>
+      <div class="tl-phase">Total (realistic median ~9 months)</div>
+      <div class="tl-hrs">705–940</div>
+      <div class="tl-dur" style="color:var(--p1);font-weight:600;">7–10 months</div>
     </div>
   </div>
 
@@ -1408,15 +1024,19 @@ body::after {
       </div>
       <div class="weekly-item">
         <strong>10–15 DSA problems</strong>
-        <p>From Phase 2 onward. No exceptions. Pattern focus.</p>
+        <p>From Phase 3 onward. No exceptions. Pattern focus over raw count.</p>
       </div>
       <div class="weekly-item">
-        <strong>1 refactor or test</strong>
+        <strong>1 refactor, test, or polish task</strong>
         <p>Clean or test something old. Polish compounds.</p>
       </div>
       <div class="weekly-item">
         <strong>1 documentation page read</strong>
-        <p>Spring, PostgreSQL, or library docs. Not YouTube.</p>
+        <p>Spring, PostgreSQL, or library docs — not YouTube.</p>
+      </div>
+      <div class="weekly-item">
+        <strong>1 thing debugged from stack trace</strong>
+        <p>Read it. Don't paste it into a search engine.</p>
       </div>
     </div>
   </div>
@@ -1426,27 +1046,30 @@ body::after {
   <div class="failure-block">
     <div class="failure-title">WHERE PEOPLE QUIT</div>
     <div class="failure-list">
-      <div class="failure-item"><span class="x">✕</span>Spending a week picking "the best resource" — pick one, start today.</div>
+      <div class="failure-item"><span class="x">✕</span>Farming easy LeetCode problems to feel productive — quality over count.</div>
       <div class="failure-item"><span class="x">✕</span>Watching tutorials without coding alongside — watching is not learning.</div>
-      <div class="failure-item"><span class="x">✕</span>Farming easy LeetCode to feel productive — quality over count.</div>
       <div class="failure-item"><span class="x">✕</span>Avoiding hard bugs instead of reading the stack trace.</div>
       <div class="failure-item"><span class="x">✕</span>Switching to Node/Python when Spring gets hard — resets the clock.</div>
       <div class="failure-item"><span class="x">✕</span>Leaving projects at 80% — undeployed = invisible.</div>
       <div class="failure-item"><span class="x">✕</span>Skipping tests because "it works" — works ≠ production-aware.</div>
       <div class="failure-item"><span class="x">✕</span>No README, no Swagger docs — undocumented projects look incomplete.</div>
+      <div class="failure-item"><span class="x">✕</span>Skipping the Linux module and panicking on every deployment.</div>
+      <div class="failure-item"><span class="x">✕</span>Skipping the Networking module and staying permanently confused about what your app is doing.</div>
+      <div class="failure-item"><span class="x">✕</span>Treating the Capstone as "just another project" — it's your story.</div>
+      <div class="failure-item"><span class="x">✕</span>Delaying positioning work until after interviews start — that's too late.</div>
     </div>
   </div>
 
   <!-- TRUTH -->
   <div class="truth-block">
     <div class="truth-quote">700 hours makes you <em>capable.</em><br>It does not guarantee a job.</div>
-    <p class="truth-sub">Hiring also depends on market conditions, resume quality, interview performance, communication, project polish, networking, and consistency under pressure. This roadmap is the vehicle. You still have to drive it.</p>
+    <p class="truth-sub">Hiring also depends on market conditions, resume quality, interview performance, communication, project polish, networking, and consistency under pressure. The roadmap is the vehicle. You still have to drive it.</p>
   </div>
 
-</div>
+</div><!-- /wrap -->
 
 <script>
-// cursor
+// Custom cursor
 const cur = document.getElementById('cur');
 const ring = document.getElementById('ring');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -1454,19 +1077,17 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cu
 function animRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); }
 animRing();
 
-// toggle phases
+// Toggle phases
 function toggle(bar) {
-  const phase = bar.closest('.phase');
-  phase.classList.toggle('open');
+  bar.closest('.phase').classList.toggle('open');
 }
 
-// PROGRESS TRACKING
-const TOTAL = 6;
-const STORAGE_KEY = 'roadmap_done_phases';
+// Progress tracking
+const TOTAL = 9;
+const STORAGE_KEY = 'roadmap_v4_done_phases';
 
 function getCompleted() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-  catch { return []; }
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
 }
 function saveCompleted(arr) {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); } catch {}
@@ -1476,11 +1097,8 @@ function updateProgressUI() {
   const completed = getCompleted();
   const count = completed.length;
   const pct = (count / TOTAL) * 100;
-
   document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('progressCount').textContent = count + '/' + TOTAL;
-
-  // dots
   const dotsEl = document.getElementById('progressDots');
   dotsEl.innerHTML = '';
   for (let i = 1; i <= TOTAL; i++) {
@@ -1489,10 +1107,6 @@ function updateProgressUI() {
     d.title = 'Phase ' + i;
     dotsEl.appendChild(d);
   }
-
-  // show/hide bar after hero
-  const bar = document.getElementById('progressBar');
-  bar.classList.toggle('visible', window.scrollY > 200);
 }
 
 function showToast(msg) {
@@ -1508,31 +1122,21 @@ function markDone(btn, phaseNum) {
   const phase = btn.closest('.phase');
   const completed = getCompleted();
   const idx = completed.indexOf(phaseNum);
-
   if (idx === -1) {
-    // mark done
     completed.push(phaseNum);
     saveCompleted(completed);
     phase.classList.add('done');
     btn.innerHTML = '<span class="check-icon">✓</span>Mark Undone';
-
-    if (completed.length === TOTAL) {
-      showToast('ALL PHASES COMPLETE');
-    } else {
-      showToast('P' + phaseNum + ' DONE');
-    }
+    showToast(completed.length === TOTAL ? 'ALL PHASES COMPLETE' : 'P' + phaseNum + ' DONE');
   } else {
-    // unmark
     completed.splice(idx, 1);
     saveCompleted(completed);
     phase.classList.remove('done');
     btn.innerHTML = '<span class="check-icon">✓</span>Mark Phase Done';
   }
-
   updateProgressUI();
 }
 
-// restore state on load
 function restoreState() {
   const completed = getCompleted();
   document.querySelectorAll('.phase[data-phase]').forEach(phase => {
@@ -1547,14 +1151,13 @@ function restoreState() {
 }
 
 window.addEventListener('scroll', () => {
-  const bar = document.getElementById('progressBar');
-  bar.classList.toggle('visible', window.scrollY > 200);
+  document.getElementById('progressBar').classList.toggle('visible', window.scrollY > 200);
 });
 
-// fade in on scroll
-const observer = new IntersectionObserver((entries) => {
+// Fade in on scroll
+const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if(e.isIntersecting) {
+    if (e.isIntersecting) {
       e.target.style.opacity = '1';
       e.target.style.transform = 'translateY(0)';
     }
@@ -1570,11 +1173,9 @@ document.querySelectorAll('.phase, .daily-card, .stack-block, .timeline-block, .
 
 restoreState();
 
-// PC usability fix: disable custom cursor when hidden by desktop CSS
 if (window.matchMedia('(min-width: 1280px)').matches) {
   document.body.style.cursor = 'auto';
 }
-
 </script>
 </body>
 </html>
